@@ -1,0 +1,1 @@
+CREATE TABLE "public"."user_roles" ("user" text NOT NULL, "role" text NOT NULL, PRIMARY KEY ("user","role") , FOREIGN KEY ("role") REFERENCES "public"."roles"("role") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("user") REFERENCES "public"."users"("id") ON UPDATE restrict ON DELETE restrict);COMMENT ON TABLE "public"."user_roles" IS E'user role mapping';

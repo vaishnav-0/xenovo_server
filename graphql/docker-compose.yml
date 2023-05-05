@@ -13,6 +13,9 @@ services:
     - "8080:8080"
     depends_on:
     - "postgres"
+    volumes:
+        - ./hasura/migrations:/hasura-migrations
+        - ./hasura/metadata:/hasura-metadata    
     restart: always
     environment:
       ## postgres database to store Hasura metadata
