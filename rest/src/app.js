@@ -14,6 +14,8 @@ const app = express();
 // app.use("/public",express.static('static'));
 
 
+app.enable('trust proxy');
+
 app.use([
     express.urlencoded({ extended: false }),
     express.json()

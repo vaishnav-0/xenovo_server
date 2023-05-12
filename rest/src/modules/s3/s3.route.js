@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const s3Controller = require('./s3.controller');
-// const verifyAwsJwt = require('../auth/cognito.middleware');
-const hasRole = require('../auth/role.middleware');
-const { hasuraAuth } = require('../auth/auth.middleware');
+// const hasRole = require('../auth/role.middleware');
+const authMiddleware = require('../auth/auth.middleware');
 
+
+router.use(authMiddleware.decodeFirebaseIdToken);
+router.use(authMiddleware.isAuthorized);
 
 /**
  * @api {get} /preSignedUrl/:key Request Presigned URL for retrieving S3 objects
@@ -27,7 +29,7 @@ router.get('/preSignedUrl', s3Controller.getPresignedUrl)
  * @apiSuccess {String} url PUT URL for provided object key.
  * 
  */
-router.put('/preSignedUrl/:key', hasRole(['admin', 'landlord']), s3Controller.putPresignedUrl);
+router.put('/preSignedUrl/:key', s3Controller.putPresignedUrl);
 
 
 /**
@@ -43,10 +45,10 @@ router.put('/preSignedUrl/:key', hasRole(['admin', 'landlord']), s3Controller.pu
  * @apiSuccess {Object} fields POST URL for provided object key.
  * 
  */
-router.post('/preSignedUrl', hasRole(['tenant', 'admin', 'landlord']), s3Controller.postPresignedUrl);
+router.post('/preSignedUrl', s3Controller.postPresignedUrl);
 
 // delete s3 object
-router.post('/object', hasuraAuth, s3Controller.deleteS3Object);
+// router.post('/object', hasuraAuth, s3Controller.deleteS3Object);
 
 
 module.exports = router;
