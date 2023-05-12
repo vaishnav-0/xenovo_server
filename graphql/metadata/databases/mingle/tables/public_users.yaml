@@ -2,6 +2,27 @@ table:
   name: users
   schema: public
 array_relationships:
+  - name: ad_shares
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: ad_shares
+          schema: public
+  - name: referals
+    using:
+      foreign_key_constraint_on:
+        column: referred
+        table:
+          name: referals
+          schema: public
+  - name: referalsByReferrer
+    using:
+      foreign_key_constraint_on:
+        column: referrer
+        table:
+          name: referals
+          schema: public
   - name: user_roles
     using:
       foreign_key_constraint_on:

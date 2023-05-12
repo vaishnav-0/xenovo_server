@@ -1,0 +1,21 @@
+table:
+  name: referals
+  schema: public
+object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: referred
+  - name: userByReferrer
+    using:
+      foreign_key_constraint_on: referrer
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - id
+        - referred
+        - referrer
+      filter:
+        referrer:
+          _eq: X-Hasura-User-Id

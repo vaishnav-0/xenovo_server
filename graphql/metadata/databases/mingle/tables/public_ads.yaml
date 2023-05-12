@@ -1,0 +1,19 @@
+table:
+  name: ads
+  schema: public
+array_relationships:
+  - name: ad_shares
+    using:
+      foreign_key_constraint_on:
+        column: ad_id
+        table:
+          name: ad_shares
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - description
+        - id
+        - image
+      filter: {}

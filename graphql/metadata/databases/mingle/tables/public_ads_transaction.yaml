@@ -1,0 +1,3 @@
+table:
+  name: ads_transaction
+  schema: public

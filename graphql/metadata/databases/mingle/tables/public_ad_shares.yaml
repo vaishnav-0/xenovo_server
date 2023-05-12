@@ -1,0 +1,35 @@
+table:
+  name: ad_shares
+  schema: public
+object_relationships:
+  - name: ad
+    using:
+      foreign_key_constraint_on: ad_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+        - ad_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - clicks
+        - key
+        - user_id
+        - time
+        - ad_id
+        - id
+      filter:
+        user:
+          id:
+            _eq: X-Hasura-User-Id

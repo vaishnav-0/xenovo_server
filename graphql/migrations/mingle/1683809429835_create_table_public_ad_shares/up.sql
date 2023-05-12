@@ -1,0 +1,2 @@
+CREATE TABLE "public"."ad_shares" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "user_id" text NOT NULL, "ad_id" uuid NOT NULL, "time" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("ad_id") REFERENCES "public"."ads"("id") ON UPDATE restrict ON DELETE restrict);COMMENT ON TABLE "public"."ad_shares" IS E'ads shared by user';
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
