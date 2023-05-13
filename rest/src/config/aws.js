@@ -7,7 +7,7 @@ const credentials = {
 }
 
 const config = {
-    region: process.env.REGION,
+    region: process.env.AWS_REGION,
     credentials
 }
 

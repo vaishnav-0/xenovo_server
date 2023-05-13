@@ -9,6 +9,7 @@ const query = graphql.gql`
     id
     ad {
       url
+      expiry
     }
   }
 }
@@ -24,34 +25,36 @@ mutation UPDATE_CLICK($id: uuid = "") {
 
 
 const redirect = async (req, res) => {
-    const { key } = req.params;
+  const { key } = req.params;
 
-    try {
+  try {
 
-        const data = await graphqlClient.request(query, { key })
-        console.log(data)
-        if (data.ad_shares.length === 0)
-            return res.status(401).json({ message: "url not found" });
-        console.log(redisClient)
-        const visited = await redisClient.sIsMember(key, req.socket.remoteAddress)
-        console.log(visited)
-        if (!visited) {
-
-            console.log(req.socket.remoteAddress)
-            await redisClient.sAdd(key, req.socket.remoteAddress)
-            await redisClient.expireAt(key, parseInt((+new Date) / 1000) + 86400);
-
-
-            await graphqlClient.request(updateCount, { id: data.ad_shares[0].id })
-            console.log("updated")
-            return res.redirect(307, data.ad_shares[0].ad.url);
-        }
-
-        return res.redirect(307, data.ad_shares[0].ad.url);
-    } catch (e) {
-        console.log(e)
-        return res.status(500).json();
+    const data = await graphqlClient.request(query, { key })
+    console.log(data)
+    if (data.ad_shares.length === 0)
+      return res.status(401).json({ message: "url not found" });
+    if (new Date(data.ad_shares[0].ad.expiry).getTime() < Date.now()) {
+      return res.status(401).json({ message: "expired" });
     }
+    const visited = await redisClient.sIsMember(key, req.socket.remoteAddress)
+    console.log(visited)
+    if (!visited) {
+
+      console.log(req.socket.remoteAddress)
+      await redisClient.sAdd(key, req.socket.remoteAddress)
+      await redisClient.expireAt(key, parseInt((+new Date) / 1000) + 86400);
+
+
+      await graphqlClient.request(updateCount, { id: data.ad_shares[0].id })
+      console.log("updated")
+      return res.redirect(307, data.ad_shares[0].ad.url);
+    }
+
+    return res.redirect(307, data.ad_shares[0].ad.url);
+  } catch (e) {
+    console.log(e)
+    return res.status(500).json();
+  }
 
 }
 
