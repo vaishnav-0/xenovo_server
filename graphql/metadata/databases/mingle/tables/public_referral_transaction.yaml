@@ -1,3 +1,7 @@
 table:
   name: referral_transaction
   schema: public
+object_relationships:
+  - name: referal
+    using:
+      foreign_key_constraint_on: refferal

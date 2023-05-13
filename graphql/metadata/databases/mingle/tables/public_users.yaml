@@ -1,6 +1,14 @@
 table:
   name: users
   schema: public
+object_relationships:
+  - name: referal
+    using:
+      foreign_key_constraint_on:
+        column: referred
+        table:
+          name: referals
+          schema: public
 array_relationships:
   - name: ad_shares
     using:

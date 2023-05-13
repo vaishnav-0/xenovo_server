@@ -1,3 +1,7 @@
 table:
   name: ads_transaction
   schema: public
+object_relationships:
+  - name: ad_share
+    using:
+      foreign_key_constraint_on: ad

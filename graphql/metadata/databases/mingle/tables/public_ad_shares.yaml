@@ -8,6 +8,14 @@ object_relationships:
   - name: user
     using:
       foreign_key_constraint_on: user_id
+array_relationships:
+  - name: ads_transactions
+    using:
+      foreign_key_constraint_on:
+        column: ad
+        table:
+          name: ads_transaction
+          schema: public
 insert_permissions:
   - role: user
     permission:
