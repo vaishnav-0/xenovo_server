@@ -25,7 +25,7 @@ services:
       - "1124:1124"
     volumes:
       - .:/home/node/xenovo
-    command: /home/node/xenovo/node_modules/.bin/nodemon server.js
+    command: /home/node/node_modules/.bin/nodemon server.js
 
 networks:
   default:
