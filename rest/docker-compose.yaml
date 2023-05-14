@@ -25,7 +25,6 @@ services:
       - "1124:1124"
     volumes:
       - .:/home/node/xenovo
-      - node_modules:/home/node/xenovo/node_modules
     command: /home/node/xenovo/node_modules/.bin/nodemon server.js
 
 networks:
@@ -33,5 +32,3 @@ networks:
     external:
       name: graphql_default
 
-volumes:
-  node_modules:

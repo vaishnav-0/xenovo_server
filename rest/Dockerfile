@@ -1,12 +1,12 @@
 FROM node:16-alpine
 
-RUN mkdir -p /home/node/xenovo/node_modules && chown -R node:node /home/node/xenovo
+RUN mkdir -p /home/node/node_modules && mkdir -p /home/node/xenovo && chown -R node:node /home/node/xenovo
 
 WORKDIR /home/node/xenovo
 
 COPY package*.json ./
 
-RUN npm install
+RUN npm --prefix .. install .
 
 USER node
 
