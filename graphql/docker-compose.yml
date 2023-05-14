@@ -17,6 +17,7 @@ services:
         - ./hasura/migrations:/hasura-migrations
         - ./hasura/metadata:/hasura-metadata    
     restart: always
+    env_file: .env
     environment:
       ## postgres database to store Hasura metadata
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
@@ -30,7 +31,6 @@ services:
       ## uncomment next line to run console offline (i.e load console assets from server instead of CDN)
       # HASURA_GRAPHQL_CONSOLE_ASSETS_DIR: /srv/console-assets
       ## uncomment next line to set an admin secret
-      HASURA_GRAPHQL_ADMIN_SECRET: mingle
       HASURA_GRAPHQL_JWT_SECRET: | 
           {
             "type":"RS256",
