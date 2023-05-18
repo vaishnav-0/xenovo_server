@@ -13,7 +13,11 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - customer
         - description
+        - expiry
         - id
         - image
+        - name
+        - price
       filter: {}

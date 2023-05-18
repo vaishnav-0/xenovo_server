@@ -38,3 +38,18 @@ array_relationships:
         table:
           name: user_roles
           schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - email
+        - phone
+        - gender
+        - name
+        - DOB
+        - contacts
+        - PIN
+      filter:
+        id:
+          _eq: X-Hasura-User-Id

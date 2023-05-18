@@ -4,5 +4,6 @@
 - "!include public_referals.yaml"
 - "!include public_referral_transaction.yaml"
 - "!include public_roles.yaml"
+- "!include public_user_public.yaml"
 - "!include public_user_roles.yaml"
 - "!include public_users.yaml"

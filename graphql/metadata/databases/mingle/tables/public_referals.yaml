@@ -2,9 +2,18 @@ table:
   name: referals
   schema: public
 object_relationships:
-  - name: user
+  - name: RefferedUser
     using:
       foreign_key_constraint_on: referred
+  - name: reffered_user
+    using:
+      manual_configuration:
+        column_mapping:
+          referred: id
+        insertion_order: null
+        remote_table:
+          name: user_public
+          schema: public
   - name: userByReferrer
     using:
       foreign_key_constraint_on: referrer

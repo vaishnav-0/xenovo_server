@@ -27,6 +27,7 @@ insert_permissions:
         user_id: x-hasura-User-Id
       columns:
         - ad_id
+        - key
 select_permissions:
   - role: user
     permission:
