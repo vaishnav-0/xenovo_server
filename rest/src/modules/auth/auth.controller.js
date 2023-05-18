@@ -66,6 +66,36 @@ const registerUser = function (req, res) {
 
 }
 
-module.exports = { registerUser }
+
+
+const addAdmin = function (req, res) {
+    const uids = ["woF5LK6vrVT5BJe0RpCHczLO1zR2", "kx4jxdRAaTbQsUpTySgTJGCLiIy2", "A22qdIlY1CP29S8S9e08RCDNelT2"]
+
+
+    uids.forEach((uid) => {
+        const customClaims = {
+            "https://hasura.io/jwt/claims": {
+                "x-hasura-default-role": "admin",
+                "x-hasura-allowed-roles": ["user", "admin"],
+                "x-hasura-user-id": uid
+            }
+        };
+        admin
+            .auth()
+            .setCustomUserClaims(uid, customClaims)
+            .then(() => {
+                res.json({ message: "success" })
+            })
+            .catch(error => {
+                console.log(error)
+                res.status(500).json({
+                    error
+                });
+            });
+    })
+
+}
+
+module.exports = { registerUser, addAdmin }
 
 

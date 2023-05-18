@@ -6,7 +6,7 @@ WORKDIR /home/node
 
 COPY package*.json ./
 
-RUN npm install
+RUN yarn install
 
 RUN mkdir -p /home/node/xenovo && chown -R node:node /home/node/xenovo
 
