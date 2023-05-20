@@ -1,1 +1,7 @@
-[]
+- name: graphql_server
+  definition:
+    url: '{{EXTERNAL_GRAPHQL_ENGINE}}'
+    timeout_seconds: 10
+    customization: {}
+    forward_client_headers: true
+  comment: s3 get image url

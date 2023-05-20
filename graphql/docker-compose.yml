@@ -38,6 +38,7 @@ services:
             "audience": "xenova-e0103",
             "issuer": "https://securetoken.google.com/xenova-e0103"
             }
+      EXTERNAL_GRAPHQL_ENGINE: http://nodejs:1124/graphql
 volumes:
   db_data:
 

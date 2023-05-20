@@ -9,6 +9,17 @@ array_relationships:
         table:
           name: ad_shares
           schema: public
+remote_relationships:
+  - definition:
+      to_remote_schema:
+        lhs_fields:
+          - image
+        remote_field:
+          s3Url:
+            arguments:
+              key: $image
+        remote_schema: graphql_server
+    name: s3
 select_permissions:
   - role: user
     permission:

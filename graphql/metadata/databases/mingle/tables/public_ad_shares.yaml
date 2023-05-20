@@ -20,14 +20,14 @@ insert_permissions:
   - role: user
     permission:
       check:
-        user:
-          id:
-            _eq: X-Hasura-User-Id
+        user_id:
+          _eq: X-Hasura-User-Id
       set:
         user_id: x-hasura-User-Id
       columns:
         - ad_id
         - key
+        - user_id
 select_permissions:
   - role: user
     permission:
@@ -39,6 +39,5 @@ select_permissions:
         - ad_id
         - id
       filter:
-        user:
-          id:
-            _eq: X-Hasura-User-Id
+        user_id:
+          _eq: X-Hasura-User-Id
