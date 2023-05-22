@@ -22,7 +22,7 @@ services:
       - REDIS_URL=redis://cache
       - GRAPHQL_ENDPOINT=http://graphql-engine:8080/v1/graphql
     ports:
-      - "80:1124"
+      - "1124:1124"
     volumes:
       - .:/home/node/xenovo
     command: /home/node/node_modules/.bin/nodemon server.js
