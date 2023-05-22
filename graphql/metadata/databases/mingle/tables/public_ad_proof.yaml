@@ -1,0 +1,17 @@
+table:
+  name: ad_proof
+  schema: public
+object_relationships:
+  - name: ad_share
+    using:
+      foreign_key_constraint_on: id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        ad_share:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+        - picture
+        - id

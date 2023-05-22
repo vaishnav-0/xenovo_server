@@ -5,6 +5,13 @@ object_relationships:
   - name: ad
     using:
       foreign_key_constraint_on: ad_id
+  - name: ad_proof
+    using:
+      foreign_key_constraint_on:
+        column: id
+        table:
+          name: ad_proof
+          schema: public
   - name: user
     using:
       foreign_key_constraint_on: user_id
