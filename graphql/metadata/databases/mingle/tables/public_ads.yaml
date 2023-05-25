@@ -19,7 +19,7 @@ remote_relationships:
             arguments:
               key: $image
         remote_schema: graphql_server
-    name: s3
+    name: s3_url
 select_permissions:
   - role: user
     permission:

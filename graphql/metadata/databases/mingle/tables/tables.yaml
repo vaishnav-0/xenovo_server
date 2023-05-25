@@ -1,5 +1,6 @@
 - "!include public_ad_proof.yaml"
 - "!include public_ad_shares.yaml"
+- "!include public_ad_shares_completed.yaml"
 - "!include public_ads.yaml"
 - "!include public_ads_transaction.yaml"
 - "!include public_referals.yaml"

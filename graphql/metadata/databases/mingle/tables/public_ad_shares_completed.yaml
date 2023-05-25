@@ -1,0 +1,39 @@
+table:
+  name: ad_shares_completed
+  schema: public
+object_relationships:
+  - name: user
+    using:
+      manual_configuration:
+        column_mapping:
+          user_id: id
+        insertion_order: null
+        remote_table:
+          name: users
+          schema: public
+remote_relationships:
+  - definition:
+      to_remote_schema:
+        lhs_fields:
+          - clicks
+          - price
+        remote_field:
+          payout:
+            arguments:
+              clicks: $clicks
+              ppc: $price
+        remote_schema: graphql_server
+    name: payout
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - ad_id
+        - clicks
+        - id
+        - key
+        - time
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

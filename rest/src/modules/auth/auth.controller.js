@@ -14,7 +14,6 @@ const query = graphql.gql`
 
 const registerUser = function (req, res) {
 
-    console.log(req.body)
 
     if (!req.user["https://hasura.io/jwt/claims"]) {
         const customClaims = {
