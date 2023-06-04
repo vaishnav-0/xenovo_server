@@ -49,7 +49,7 @@ const postS3signedUrl = async ({ name, extention }) => {
         Key: `${name.substring(0, extentionIndex)}-${Date.now()}${name.substring(extentionIndex)}`,
         Expires: process.env.S3_URL_EXPIRY,
         Conditions: [["content-length-range", process.env.CONTENT_LENGTH_FROM_SIZE, process.env.CONTENT_LENGTH_TO_SIZE]], //bytes
-        Fields: { contentType: extention }
+        Fields: { "Content-Type": extention }
     }
     try {
         const { url, fields } = await createPresignedPost(s3Client, params);
