@@ -130,3 +130,5 @@ dist
 .pnp.*
 
 *.pem
+
+service_account*.json
