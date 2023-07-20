@@ -6,7 +6,7 @@ services:
     volumes:
     - db_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   graphql-engine:
     image: hasura/graphql-engine:v2.23.0
     ports:
@@ -20,9 +20,9 @@ services:
     env_file: .env
     environment:
       ## postgres database to store Hasura metadata
-      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
-      PG_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      PG_DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
       ## enable the console served by server
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
@@ -35,8 +35,8 @@ services:
           {
             "type":"RS256",
             "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
-            "audience": "xenova-e0103",
-            "issuer": "https://securetoken.google.com/xenova-e0103"
+            "audience": "xenova-f63a9",
+            "issuer": "https://securetoken.google.com/xenova-f63a9"
             }
       EXTERNAL_GRAPHQL_ENGINE: http://nodejs:1124/graphql
 volumes:
